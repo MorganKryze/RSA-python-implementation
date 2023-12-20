@@ -1,6 +1,6 @@
-# RSA
+# RSA-python-implementation
 
-> A quick implementation of RSA in Python.
+> A simple implementation of RSA in Python designed for numbers and texts.
 
 ![Demo](src/img/screenshot.png)
 
