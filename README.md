@@ -22,7 +22,7 @@ git clone https://github.com/MorganKryze/RSA.git
 Then navigate to the directory and install the dependencies using:
 
 ```bash
-cd RSA
+cd RSA-python-implementation
 pip install -r requirements.txt
 ```
 
