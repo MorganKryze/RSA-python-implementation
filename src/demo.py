@@ -99,6 +99,22 @@ def verify(n: int, e: int, m: int | str, s: int | str) -> bool:
     hashed = int(hs.sha256(str(m).encode("utf-8")).hexdigest(), 16)
     return gmpy2.mod(hashed, n) == gmpy2.powmod(s, e, n)
 
+def truncate_number(num: int, length: int = 6) -> str:
+    """Truncate a number to print a shorter version.
+
+    Args:
+    ----
+    num (int): The number to be truncated.
+    length (int): The number of digits to keep at the start and end. Default is 4.
+
+    Returns:
+    -------
+    str: The truncated number as a string.
+    """
+    num_str = str(num)
+    if len(num_str) <= 2 * length:
+        return num_str
+    return num_str[:length] + "..." + num_str[-length:]
 
 
 if __name__ == "__main__":
@@ -109,21 +125,23 @@ if __name__ == "__main__":
     text_message = "Hello World"
     n, e, d = key_gen()
 
-    print("public key: ", (n, e), "\n")
+    print("\n")
 
-    print ("secret key: ", d, "\n")
+    print("public key: ", (truncate_number(n), truncate_number(e)), "\n")
+
+    print ("secret key: ", truncate_number(d), "\n")
 
     print ("message: ", message, "\n")
 
-    print("ciphertext: ", encrypt(n, e, message), "\n")
+    print("ciphertext: ", truncate_number(encrypt(n, e, message)), "\n")
 
     assert (decrypt(n, d, encrypt(n, e, message)) == message)
 
-    print("long message: ", long_message, "\n")
+    print("long message: ", truncate_number(long_message), "\n")
 
     s = sign(n, d, long_message)
 
-    print("signature: ", s, "\n")
+    print("signature: ", truncate_number(s), "\n")
 
     print("verify: ", verify(n, e, long_message, s), "\n")
 
