@@ -99,7 +99,7 @@ def verify(n: int, e: int, m: int | str, s: int | str) -> bool:
     hashed = int(hs.sha256(str(m).encode("utf-8")).hexdigest(), 16)
     return gmpy2.mod(hashed, n) == gmpy2.powmod(s, e, n)
 
-def truncate_number(num: int, length: int = 6) -> str:
+def truncate_number(num: int, length: int = 10) -> str:
     """Truncate a number to print a shorter version.
 
     Args:
@@ -143,6 +143,6 @@ if __name__ == "__main__":
 
     print("signature: ", truncate_number(s), "\n")
 
-    print("verify: ", verify(n, e, long_message, s), "\n")
+    print("verify message: ", verify(n, e, long_message, s), "\n")
 
     assert (verify(n, e, text_message, sign(n, d, text_message)))
